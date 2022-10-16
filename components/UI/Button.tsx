@@ -1,31 +1,42 @@
-import React, {FC, ReactNode} from 'react';
+import React, { FC, ReactNode } from 'react'
 
 interface ButtonProps {
-  onClick: () => void
-  variant: 'primary' | 'secondary'
+  onClick?: () => void
+  variant: 'fill' | 'outline'
   children: ReactNode | JSX.Element
   className?: string
+  disabled?: boolean
 }
 
 const Button: FC<ButtonProps> = (props) => {
-  const {onClick, variant, children, className} = props
+  const { onClick, variant, children, className, disabled } = props
 
   const classes = [className, '']
 
   switch (variant) {
-    case "primary":
-      classes.push('py-3 px-6 font-medium text-white border-0 rounded-lg bg-teal-500 hover:bg-teal-600')
+    case 'fill':
+      classes.push(
+        'block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded outline-none transition duration-100 px-8 py-3'
+      )
       break
-    case "secondary":
-      classes.push('py-3 px-6 font-medium text-gray-700 border-0 rounded-lg bg-gray-100 hover:bg-gray-200')
+    case 'outline':
+      classes.push(
+        'font-medium text-gray-700 border rounded border-gray-100 hover:bg-gray-100'
+      )
       break
   }
 
-    return (
-      <button className={classes.join(' ')} onClick={onClick}>
-        {children}
-      </button>
-    );
-};
+  if(disabled) {
+    classes.push(
+      'opacity-75 bg-gray-100 pointer-events-none'
+    )
+  }
 
-export default Button;
+  return (
+    <button className={classes.join(' ')} onClick={onClick} disabled={disabled}>
+      {children}
+    </button>
+  )
+}
+
+export default Button

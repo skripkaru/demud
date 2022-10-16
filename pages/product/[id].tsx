@@ -1,50 +1,124 @@
 import type {NextPage} from 'next'
-import {useRouter} from "next/router";
-import {products} from "../../constants";
-import Layout from "components/Layout";
+import Image from 'next/image'
+import Head from "next/head";
+import React, {useState} from "react";
+import {getData} from "@utils/fetchData";
+import {Product} from "../../types";
+import Button from "@components/UI/Button";
+import {useActions} from "@hooks/useActions";
+import {useAppSelector} from "@hooks/useAppSelector";
 
-const Product: NextPage = () => {
-  const router = useRouter()
-  const {id}: any = router.query
+interface ProductProps {
+  product: Product
+}
+
+const Product: NextPage<ProductProps> = (props) => {
+  const [product] = useState(props.product)
+  const [tab, setTab] = useState(0)
+  const {addToCart, setNotify} = useActions()
+  const {cart} = useAppSelector(state => state.cart)
+
+  const handleAddToCart = (product: Product, cart: Product[]) => {
+    if (product.inStock === 0) {
+      return setNotify({error: 'Этот товар отсутствует на складе'})
+    }
+
+    const current = cart.every(item => item._id !== product._id)
+    if (!current) {
+      return setNotify({success: 'Товар добавлен в корзину'})
+    }
+
+    return addToCart(product)
+  }
 
   return (
-    <Layout>
-      <section
-        className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-y-16 gap-x-8 py-24 px-4 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
-        <div>
-          <h1 className="text-3xl font-medium tracking-tight text-gray-900 sm:text-4xl">{products[id]?.title}</h1>
-          <p className="mt-4 text-gray-500">{products[id]?.body}</p>
-          <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-            <div className="border-t border-gray-200 pt-4">
-              <dt className="font-medium text-gray-900">Материал</dt>
-              <dd className="mt-2 text-sm text-gray-500">{products[id]?.material}</dd>
+    <>
+      <Head>
+        <title>Главная</title>
+      </Head>
+
+      <section className="text-gray-600 body-font overflow-hidden">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="lg:w-4/5 mx-auto flex flex-wrap">
+            <div className='lg:w-1/2 w-full'>
+              <Image
+                src={product.images[tab].url}
+                alt={product.images[tab].url}
+                className="rounded bg-gray-100"
+                width="400"
+                height="400"
+                layout="responsive"
+              />
+              <div className='flex items-center gap-2 mt-4'>
+                {product.images.map((item, i) => (
+                  <div
+                    key={item.url}
+                    className={`w-1/4 p-1 border-2 rounded overflow-hidden hover:border-teal-500${tab === i ? ' border-teal-500' : ''}`}
+                  >
+                    <Image
+                      src={item.url}
+                      alt={item.url}
+                      className="bg-gray-100 cursor-pointer"
+                      width="80"
+                      height="80"
+                      layout="responsive"
+                      onClick={() => setTab(i)}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="border-t border-gray-200 pt-4">
-              <dt className="font-medium text-gray-900">Размеры</dt>
-              <dd className="mt-2 text-sm text-gray-500">{products[id]?.dimensions}</dd>
+
+            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
+              <p className="leading-relaxed text-sm md:text-base">{product.description}</p>
+              <div className="grid grid-cols-2 grid-rows-2 gap-2 mt-6 pb-5 border-b-2 border-gray-100 mb-5 text-sm">
+                <div className="flex flex-col">
+                  <span className='font-medium'>Цвет</span>
+                  <span>{product.color}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className='font-medium'>Размер</span>
+                  <span>{product.size} см</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className='font-medium'>В наличии</span>
+                  <span>{product.inStock > 0 ? `${product.inStock} шт` : 'Нет в наличии'}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className='font-medium'>Продано</span>
+                  <span>{product.sold}шт</span>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <span className="title-font font-medium text-2xl text-gray-900">{product.price} ₽</span>
+                <Button
+                  variant='fill'
+                  className="flex ml-auto"
+                  onClick={() => handleAddToCart(product, cart)}
+                  disabled={product.inStock === 0}
+                >
+                  Купить
+                </Button>
+              </div>
             </div>
-            <div className="border-t border-gray-200 pt-4">
-              <dt className="font-medium text-gray-900">Цвет</dt>
-              <dd className="mt-2 text-sm text-gray-500">{products[id]?.color}</dd>
-            </div>
-            <div className="border-t border-gray-200 pt-4">
-              <dt className="font-medium text-gray-900">Цена</dt>
-              <dd className="mt-2 text-sm text-gray-500">{products[id]?.price}&#8381;</dd>
-            </div>
-          </dl>
-        </div>
-        <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-          {products[id]?.images.map(item =>
-            <img
-              src={item}
-              alt={products[id]?.title}
-              className="rounded-lg bg-gray-100"
-            />
-          )}
+          </div>
         </div>
       </section>
-    </Layout>
+    </>
   )
+}
+
+// @ts-ignore
+export async function getServerSideProps({params: {id}}) {
+  // @ts-ignore
+  const res = await getData(`product/${id}`)
+
+  return {
+    props: {
+      product: res.product,
+    },
+  }
 }
 
 export default Product
