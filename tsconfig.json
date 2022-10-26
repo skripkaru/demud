@@ -6,6 +6,8 @@
       "@utils/*": ["./utils/*"],
       "@models/*": ["./models/*"],
       "@hooks/*": ["./hooks/*"],
+      "@lib/*": ["./lib/*"],
+      "@middleware/*": ["./middleware/*"],
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

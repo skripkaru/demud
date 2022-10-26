@@ -1,8 +1,8 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import connectDB from '../../../lib/connectDB'
-import Users from '@models/userModel'
+import { NextApiRequest, NextApiResponse } from 'next'
+import connectDB from '@lib/connectDB'
+import Users from '@models/user'
 import bcrypt from 'bcrypt'
-import { createAccessToken, createRefreshToken } from '../../../lib/generateToken'
+import { createAccessToken, createRefreshToken } from '@lib/generateToken'
 
 connectDB()
 

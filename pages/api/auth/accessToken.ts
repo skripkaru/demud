@@ -1,8 +1,8 @@
-import {NextApiResponse, NextApiRequest} from "next";
+import { NextApiResponse, NextApiRequest } from 'next'
 import jwt from 'jsonwebtoken'
-import connectDB from '../../../lib/connectDB'
-import Users from '@models/userModel'
-import { createAccessToken } from '../../../lib/generateToken'
+import connectDB from '@lib/connectDB'
+import Users from '@models/user'
+import { createAccessToken } from '@lib/generateToken'
 
 connectDB()
 

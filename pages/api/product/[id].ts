@@ -1,6 +1,6 @@
-import connectDB from '../../../lib/connectDB'
-import Products from '@models/productModel'
-import {NextApiRequest, NextApiResponse} from "next";
+import connectDB from '@lib/connectDB'
+import Products from '@models/product'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 connectDB()
 
@@ -14,9 +14,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 const getProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const {id} = req.query
+    const { id } = req.query
     const product = await Products.findById(id)
-    if(!product) {
+    if (!product) {
       return res.status(400).json({ err: 'Товар не найден' })
     }
 

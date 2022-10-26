@@ -1,5 +1,5 @@
-import React from 'react';
-import Collapse from "@components/UI/Collapse";
+import React from 'react'
+import Collapse from '@components/UI/Collapse'
 
 const Faq = () => {
   const questions = [
@@ -24,12 +24,12 @@ const Faq = () => {
 
         <div className="flex flex-col max-w-screen-sm border-t mx-auto">
           {questions.map((item, i) => (
-            <Collapse key={i} title={item.question} body={item.answer}/>
+            <Collapse key={i} title={item.question} body={item.answer} />
           ))}
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Faq;
+export default Faq

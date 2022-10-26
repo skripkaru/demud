@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Advantages = () => {
   const advantages = [
@@ -33,8 +33,7 @@ const Advantages = () => {
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 xl:gap-16">
           {advantages.map((item, i) => (
             <div className="flex gap-4 md:gap-6" key={i}>
-              <div
-                className="w-12 md:w-14 h-12 md:h-14 flex justify-center items-center shrink-0 bg-teal-500 text-white rounded shadow-lg">
+              <div className="w-12 md:w-14 h-12 md:h-14 flex justify-center items-center shrink-0 bg-teal-500 text-white rounded shadow-lg">
                 <svg className="icon w-5 h-5">
                   <use xlinkHref={`#${item.icon}`}></use>
                 </svg>
@@ -50,7 +49,7 @@ const Advantages = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Advantages;
+export default Advantages

@@ -19,7 +19,6 @@ const Footer = () => {
     },
   ]
 
-
   return (
     <footer className="bg-gray-100">
       <div className="container p-4 md:px-8 mx-auto flex items-center sm:flex-row flex-col">

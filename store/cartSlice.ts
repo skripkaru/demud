@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {Product} from "../types";
+import { IProduct } from '../types'
 
 export interface CartState {
-  cart: Product[]
+  cart: IProduct[]
 }
 
 const initialState: CartState = {
@@ -14,28 +14,28 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<Product>) => {
-      const item = state.cart.find((item) => item._id === action.payload._id);
+    addToCart: (state, action: PayloadAction<IProduct>) => {
+      const item = state.cart.find((item) => item._id === action.payload._id)
       if (item) {
-        item.quantity++;
+        item.quantity++
       } else {
-        state.cart.push({ ...action.payload, quantity: 1 });
+        state.cart.push({ ...action.payload, quantity: 1 })
       }
     },
-    incrementQuantity: (state, action: PayloadAction<Product>) => {
-      const item = state.cart.find((item) => item._id === action.payload._id);
-      item && item.quantity++;
+    incrementQuantity: (state, action: PayloadAction<IProduct>) => {
+      const item = state.cart.find((item) => item._id === action.payload._id)
+      item && item.quantity++
     },
-    decrementQuantity: (state, action: PayloadAction<Product>) => {
-      const item = state.cart.find((item) => item._id === action.payload._id);
+    decrementQuantity: (state, action: PayloadAction<IProduct>) => {
+      const item = state.cart.find((item) => item._id === action.payload._id)
       if (item && item.quantity === 1) {
         item.quantity = 1
       } else {
-        item && item.quantity--;
+        item && item.quantity--
       }
     },
-    removeFromCart: (state, action: PayloadAction<Product>) => {
-      state.cart = state.cart.filter((item) => item._id !== action.payload._id);
+    removeFromCart: (state, action: PayloadAction<IProduct>) => {
+      state.cart = state.cart.filter((item) => item._id !== action.payload._id)
     },
   },
 })

@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 
 const About = () => {
   return (
@@ -15,14 +15,13 @@ const About = () => {
               height="600"
             />
           </div>
-          <div
-            className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+          <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
             <h1 className="text-gray-800 text-2xl lg:text-3xl font-semibold text-center mb-4 md:mb-6">
               О нас
             </h1>
             <p className="text-gray-800 mb-4">
-              Наша миссия — создавать уникальный домашний декор ручной работы
-              на любой вкус, и мы делаем это, потому что верим, что маленькие
+              Наша миссия — создавать уникальный домашний декор ручной работы на
+              любой вкус, и мы делаем это, потому что верим, что маленькие
               детали имеют значение. Мы хотим предоставить нашим клиентам
               уникальный опыт домашнего декора — опыт, который поможет им
               чувствовать себя комфортно, безопасно и расслабленно в своем
@@ -31,9 +30,9 @@ const About = () => {
             <p className="text-gray-800 mb-4">
               Наш декор изготавливается вручную из лучших материалов и бывают
               самых разных цветов и размеров. Если вы действительно хотите
-              поднять свой домашний декор на новый уровень, мы предлагаем
-              модные и современные изделия из высокопрочного гипса, которые
-              дополнят эстетику и дополнят ваш дом.
+              поднять свой домашний декор на новый уровень, мы предлагаем модные
+              и современные изделия из высокопрочного гипса, которые дополнят
+              эстетику и дополнят ваш дом.
             </p>
             <p className="text-gray-800 mb-4">
               Наши изделия ручной работы станут замечательным подарком на
@@ -51,7 +50,7 @@ const About = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default About;
+export default About

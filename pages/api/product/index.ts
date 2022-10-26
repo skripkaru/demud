@@ -1,6 +1,6 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import connectDB from '../../../lib/connectDB'
-import Products from '@models/productModel'
+import { NextApiRequest, NextApiResponse } from 'next'
+import connectDB from '@lib/connectDB'
+import Products from '@models/product'
 
 connectDB()
 

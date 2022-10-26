@@ -1,7 +1,7 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, MouseEventHandler, ReactNode } from 'react'
 
 interface ButtonProps {
-  onClick?: () => void
+  onClick?: MouseEventHandler<HTMLButtonElement>
   variant: 'fill' | 'outline'
   children: ReactNode | JSX.Element
   className?: string
@@ -26,10 +26,8 @@ const Button: FC<ButtonProps> = (props) => {
       break
   }
 
-  if(disabled) {
-    classes.push(
-      'opacity-75 bg-gray-100 pointer-events-none'
-    )
+  if (disabled) {
+    classes.push('opacity-75 bg-gray-100 pointer-events-none')
   }
 
   return (

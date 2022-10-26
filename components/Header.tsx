@@ -1,29 +1,28 @@
 import Link from 'next/link'
-import {useRouter} from 'next/router'
-import {useAppSelector} from '@hooks/useAppSelector'
 import Image from 'next/image'
 import Cookie from 'js-cookie'
-import {useActions} from '@hooks/useActions'
-import {useState} from "react";
+import { useRouter } from 'next/router'
+import { useAppSelector } from '@hooks/useAppSelector'
+import { useActions } from '@hooks/useActions'
+import { useState } from 'react'
 
 const Header = () => {
   const router = useRouter()
-  const {auth} = useAppSelector((state) => state.auth)
-  const {cart} = useAppSelector((state) => state.cart)
-  const {setAuth, setNotify} = useActions()
+  const { auth } = useAppSelector((state) => state.auth)
+  const { cart } = useAppSelector((state) => state.cart)
+  const { setAuth, setNotify } = useActions()
   const [dropdown, setDropdown] = useState<boolean>(false)
 
   const handleLogout = () => {
-    Cookie.remove('refreshtoken', {path: 'api/auth/accessToken'})
-    // localStorage.removeItem('firstLogin')
+    Cookie.remove('refreshtoken', { path: 'api/auth/accessToken' })
     setAuth({})
-    setNotify({success: 'Вы вышли!'})
+    setNotify({ success: 'Вы вышли!' })
   }
 
   const getTotalQuantity = () => {
     const cartCopy = [...cart]
     let total = 0
-    cartCopy.forEach(item => {
+    cartCopy.forEach((item) => {
       total += item.quantity
     })
     return total
@@ -34,7 +33,7 @@ const Header = () => {
       <li className="relative">
         <a
           className="mr-5 hover:text-gray-800 flex items-center"
-          aria-expanded={dropdown ? "true" : "false"}
+          aria-expanded={dropdown ? 'true' : 'false'}
           onClick={() => setDropdown((prev) => !prev)}
         >
           {auth.user.avatar ? (
@@ -55,12 +54,14 @@ const Header = () => {
           {auth.user.name}
         </a>
 
-        <ul className={`absolute top-full border rounded bg-white shadow-lg ${dropdown ? '' : 'hidden'}`}>
+        <ul
+          className={`absolute top-full border rounded bg-white shadow-lg ${
+            dropdown ? '' : 'hidden'
+          }`}
+        >
           <li>
-            <Link href="/">
-              <a className="text-gray-700 block px-4 py-2 text-sm">
-                Профиль
-              </a>
+            <Link href="/profile">
+              <a className="text-gray-700 block px-4 py-2 text-sm">Профиль</a>
             </Link>
           </li>
           <li>
@@ -72,8 +73,6 @@ const Header = () => {
             </a>
           </li>
         </ul>
-
-
       </li>
     )
   }
@@ -92,15 +91,17 @@ const Header = () => {
             <li>
               <Link href="/cart">
                 <a
-                  className={`flex items-center mr-5 hover:text-gray-800${router.pathname === '/cart' ? ' text-teal-500' : ''}`}>
-                  <div className='relative'>
+                  className={`flex items-center mr-5 hover:text-gray-800${
+                    router.pathname === '/cart' ? ' text-teal-500' : ''
+                  }`}
+                >
+                  <div className="relative">
                     <svg className="icon w-4 h-4 mr-2">
                       <use xlinkHref="#cart"></use>
                     </svg>
-                    <span
-                      className='absolute -top-2 right-0 flex items-center justify-center w-4 h-4 rounded-full bg-teal-500 text-white text-xs'>
-                    {getTotalQuantity() || 0}
-                  </span>
+                    <span className="absolute -top-2 right-0 flex items-center justify-center w-4 h-4 rounded-full bg-teal-500 text-white text-xs">
+                      {getTotalQuantity() || 0}
+                    </span>
                   </div>
                   Корзина
                 </a>
@@ -110,7 +111,9 @@ const Header = () => {
               <li>
                 <Link href="/login">
                   <a
-                    className={`flex items-center mr-5 hover:text-gray-800${router.pathname === '/login' ? ' text-teal-500' : ''}`}
+                    className={`flex items-center mr-5 hover:text-gray-800${
+                      router.pathname === '/login' ? ' text-teal-500' : ''
+                    }`}
                   >
                     <svg className="icon w-4 h-4 mr-2">
                       <use xlinkHref="#person"></use>

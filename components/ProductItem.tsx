@@ -1,20 +1,19 @@
-import React, {FC} from 'react';
-import Link from "next/link";
-import Image from "next/image";
-import {Product} from "../types";
+import React, { FC } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { IProduct } from '../types'
 
 interface ProductItemProps {
-  product: Product
+  product: IProduct
 }
 
 const ProductItem: FC<ProductItemProps> = (props) => {
-  const {product} = props
+  const { product } = props
 
   return (
     <Link href={`/product/${product._id}`}>
       <a className="group">
-        <div
-          className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+        <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
           <Image
             src={product.images[0].url}
             alt={product.images[0].url}
@@ -25,12 +24,14 @@ const ProductItem: FC<ProductItemProps> = (props) => {
           />
         </div>
         <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
-        <div className='flex items-center justify-between'>
-          <p className="mt-1 text-lg font-medium text-gray-900">{product.price} ₽</p>
+        <div className="flex items-center justify-between">
+          <p className="mt-1 text-lg font-medium text-gray-900">
+            {product.price} ₽
+          </p>
         </div>
       </a>
     </Link>
-  );
-};
+  )
+}
 
-export default ProductItem;
+export default ProductItem

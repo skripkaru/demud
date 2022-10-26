@@ -1,9 +1,9 @@
-export interface Auth {
-  token?: string
-  user?: User | any
+export interface IAuth {
+  token: string
+  user: IUser
 }
 
-export interface User {
+export interface IUser {
   _id: string
   name: string
   email: string
@@ -13,18 +13,19 @@ export interface User {
   root: boolean
 }
 
-export interface Notify {
+export interface INotify {
   loading?: boolean
   success?: string
   error?: string
 }
 
-export interface Product {
+export interface IProduct {
   _id: string
-  images: [{ url: string }],
+  images: any
   title: string
   description: string
   material: string
+  dimensions: string
   size: string
   color: string
   price: number
@@ -32,5 +33,14 @@ export interface Product {
   checked: boolean
   sold: number
   category: string
-  quantity?: number | any
+  quantity: number
+}
+
+export interface IOrder {
+  user: IUser
+  address: string
+  phone: string
+  cart: IProduct[]
+  total: number
+  delivered?: boolean
 }

@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {authSlice} from "./authSlice";
-import {notifySlice} from './notifySlice'
-import {cartSlice} from "./cartSlice";
-import storage from 'redux-persist/lib/storage';
+import { authSlice } from './authSlice'
+import { notifySlice } from './notifySlice'
+import { cartSlice } from './cartSlice'
+import { userSlice } from './userSlice'
+
+import storage from 'redux-persist/lib/storage'
 import {
   persistStore,
   persistReducer,
@@ -13,6 +15,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
+import { modalSlice } from './modalSlice'
 
 const cartPersistConfig = {
   key: 'cart',
@@ -24,21 +27,29 @@ const authPersistConfig = {
   storage: storage,
 }
 
-const persistedCartReducer = persistReducer(cartPersistConfig, cartSlice.reducer)
-const persistedAuthReducer = persistReducer(authPersistConfig, authSlice.reducer)
+const persistedCartReducer = persistReducer(
+  cartPersistConfig,
+  cartSlice.reducer
+)
+const persistedAuthReducer = persistReducer(
+  authPersistConfig,
+  authSlice.reducer
+)
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     notify: notifySlice.reducer,
-    cart: persistedCartReducer
+    cart: persistedCartReducer,
+    modal: modalSlice.reducer,
+    user: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
+    }),
 })
 
 export const persistor = persistStore(store)

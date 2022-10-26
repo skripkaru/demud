@@ -1,13 +1,13 @@
-import React, {FC} from 'react';
-import ProductItem from "@components/ProductItem";
-import {Product} from "../types";
+import React, { FC } from 'react'
+import ProductItem from '@components/ProductItem'
+import { IProduct } from '../types'
 
 interface ProductsProps {
-  products: Product[]
+  products: IProduct[]
 }
 
-const Products:FC<ProductsProps> = (props) => {
-  const {products} = props
+const Products: FC<ProductsProps> = (props) => {
+  const { products } = props
 
   return (
     <section className="py-6 sm:py-8 lg:py-12">
@@ -21,9 +21,11 @@ const Products:FC<ProductsProps> = (props) => {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {products.length !== 0 ? products.map(product => (
-            <ProductItem key={product._id} product={product}/>
-          )) : (
+          {products.length !== 0 ? (
+            products.map((product) => (
+              <ProductItem key={product._id} product={product} />
+            ))
+          ) : (
             <h2 className="text-gray-800 text-2xl lg:text-3xl font-semibold text-center mb-4 md:mb-6">
               Нет товаров
             </h2>
@@ -31,8 +33,7 @@ const Products:FC<ProductsProps> = (props) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-
-export default Products;
+export default Products

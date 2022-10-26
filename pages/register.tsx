@@ -1,25 +1,25 @@
-import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import valid from '@utils/valid'
-import {useActions} from '@hooks/useActions'
-import {postData} from '@utils/fetchData'
-import {useAppSelector} from '@hooks/useAppSelector'
-import {useRouter} from 'next/router'
-import Input from "@components/UI/Input";
-import Button from "@components/UI/Button";
+import { useActions } from '@hooks/useActions'
+import { postData } from '@utils/fetchData'
+import { useAppSelector } from '@hooks/useAppSelector'
+import { useRouter } from 'next/router'
+import Input from '@components/UI/Input'
+import Button from '@components/UI/Button'
 
 const Register = () => {
-  const initialState = {name: '', email: '', password: '', cf_password: ''}
+  const initialState = { name: '', email: '', password: '', cf_password: '' }
   const [userData, setUserData] = useState(initialState)
-  const {name, email, password, cf_password} = userData
-  const {setNotify} = useActions()
-  const {auth} = useAppSelector((state) => state.auth)
+  const { name, email, password, cf_password } = userData
+  const { setNotify } = useActions()
+  const { auth } = useAppSelector((state) => state.auth)
   const router = useRouter()
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target
-    setUserData({...userData, [name]: value})
+    const { name, value } = e.target
+    setUserData({ ...userData, [name]: value })
     setNotify({})
   }
 
@@ -28,18 +28,18 @@ const Register = () => {
     const errMsg = valid(name, email, password, cf_password)
 
     if (errMsg) {
-      return setNotify({error: errMsg})
+      return setNotify({ error: errMsg })
     }
 
-    setNotify({loading: true})
+    setNotify({ loading: true })
 
     const res = await postData('auth/register', userData, '')
 
     if (res.err) {
-      return setNotify({error: res.err})
+      return setNotify({ error: res.err })
     }
 
-    return setNotify({success: res.msg})
+    return setNotify({ success: res.msg })
   }
 
   useEffect(() => {
@@ -101,9 +101,7 @@ const Register = () => {
                 value={cf_password}
                 onChange={handleChangeInput}
               />
-              <Button variant='fill'>
-                Зарегистрироваться
-              </Button>
+              <Button variant="fill">Зарегистрироваться</Button>
             </div>
 
             <div className="flex justify-center items-center bg-gray-100 p-4">

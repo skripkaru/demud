@@ -6,8 +6,8 @@ import { getData, postData } from '@utils/fetchData'
 import Cookie from 'js-cookie'
 import { useAppSelector } from '@hooks/useAppSelector'
 import { useRouter } from 'next/router'
-import Input from "@components/UI/Input";
-import Button from "@components/UI/Button";
+import Input from '@components/UI/Input'
+import Button from '@components/UI/Button'
 
 const Login = () => {
   const initialState = { name: '', email: '', password: '', cf_password: '' }
@@ -106,9 +106,7 @@ const Login = () => {
                 value={password}
                 onChange={handleChangeInput}
               />
-              <Button variant='fill'>
-                Войти
-              </Button>
+              <Button variant="fill">Войти</Button>
             </div>
 
             <div className="flex justify-center items-center bg-gray-100 p-4">

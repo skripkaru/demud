@@ -1,6 +1,7 @@
-import mongoose from 'mongoose'
+import mongoose, { model, Model, Schema } from 'mongoose'
+import { IProduct } from '../types'
 
-const productSchema = new mongoose.Schema(
+const ProductSchema: Schema = new Schema<IProduct>(
   {
     title: {
       type: String,
@@ -54,6 +55,6 @@ const productSchema = new mongoose.Schema(
   }
 )
 
-let Dataset =
-  mongoose.models.product || mongoose.model('product', productSchema)
-export default Dataset
+const Product: Model<IProduct> =
+  mongoose.models.Product || model('Product', ProductSchema)
+export default Product

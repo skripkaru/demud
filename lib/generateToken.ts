@@ -1,4 +1,4 @@
-import jwt, {JwtPayload} from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export const createAccessToken = (payload: JwtPayload) => {
   return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET as string, {

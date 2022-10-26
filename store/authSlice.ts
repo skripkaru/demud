@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {Auth} from "../types";
+import { IAuth } from '../types'
 
 export interface AuthState {
-  auth: Auth
+  auth: IAuth
 }
 
 const initialState: AuthState = {
-  auth: {}
+  auth: {},
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuth: (state, action: PayloadAction<Auth>) => {
+    setAuth: (state, action: PayloadAction<IAuth>) => {
       state.auth = action.payload
     },
   },

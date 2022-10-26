@@ -1,5 +1,5 @@
-import connectDB from '../../../lib/connectDB'
-import Users from '@models/userModel'
+import connectDB from '@lib/connectDB'
+import Users from '@models/user'
 import valid from '@utils/valid'
 import bcrypt from 'bcrypt'
 

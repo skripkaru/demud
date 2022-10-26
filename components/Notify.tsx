@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useAppSelector } from '@hooks/useAppSelector'
 import { useActions } from '@hooks/useActions'
 import Loading from '@components/UI/Loading'
@@ -7,6 +7,14 @@ import Toast from '@components/UI/Toast'
 const Notify = () => {
   const { notify } = useAppSelector((state) => state.notify)
   const { setNotify } = useActions()
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNotify({})
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  })
 
   return (
     <>

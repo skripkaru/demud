@@ -1,6 +1,7 @@
-import mongoose from 'mongoose'
+import mongoose, { model, Model, Schema } from 'mongoose'
+import { IUser } from '../types'
 
-const userSchema = new mongoose.Schema(
+const UserSchema: Schema = new Schema<IUser>(
   {
     name: {
       type: String,
@@ -34,5 +35,5 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-let Dataset = mongoose.models.user || mongoose.model('user', userSchema)
-export default Dataset
+const User: Model<IUser> = mongoose.models.User || model('User', UserSchema)
+export default User
