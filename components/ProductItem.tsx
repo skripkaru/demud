@@ -13,13 +13,13 @@ const ProductItem: FC<ProductItemProps> = (props) => {
   return (
     <Link href={`/product/${product._id}`}>
       <a className="group">
-        <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+        <div className="w-full overflow-hidden rounded bg-gray-200">
           <Image
             src={product.images[0].url}
             alt={product.images[0].url}
             className="h-full w-full object-cover object-center group-hover:opacity-75 transition-opacity"
             width="640"
-            height="640"
+            height="700"
             layout="responsive"
           />
         </div>

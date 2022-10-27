@@ -8,7 +8,8 @@ export interface IUser {
   name: string
   email: string
   password: string
-  avatar: string
+  cf_password: string
+  avatar: string | any
   role: string
   root: boolean
 }
@@ -21,7 +22,7 @@ export interface INotify {
 
 export interface IProduct {
   _id: string
-  images: any
+  images: any[]
   title: string
   description: string
   material: string

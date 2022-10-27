@@ -9,23 +9,29 @@ const Notify = () => {
   const { setNotify } = useActions()
 
   useEffect(() => {
+    if (Object.keys(notify).length === 0) return
+
     const timer = setTimeout(() => {
-      setNotify({})
+      handleClose()
     }, 3000)
 
     return () => clearTimeout(timer)
-  })
+  }, [notify, setNotify])
+
+  const handleClose = () => {
+    setNotify({})
+  }
 
   return (
     <>
       {notify.loading && <Loading />}
       {notify.error && (
-        <Toast className="bg-red-500" onClick={() => setNotify({})}>
+        <Toast className="bg-red-500" onClick={handleClose}>
           {notify.error}
         </Toast>
       )}
       {notify.success && (
-        <Toast className="bg-green-500" onClick={() => setNotify({})}>
+        <Toast className="bg-green-500" onClick={handleClose}>
           {notify.success}
         </Toast>
       )}

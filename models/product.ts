@@ -30,7 +30,7 @@ const ProductSchema: Schema = new Schema<IProduct>(
       required: true,
     },
     images: {
-      type: Array,
+      type: Schema.Types.Mixed,
       required: true,
     },
     category: {

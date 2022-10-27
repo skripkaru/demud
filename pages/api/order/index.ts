@@ -45,7 +45,7 @@ const sold = async (
   oldSold: number
 ) => {
   await Products.findOneAndUpdate(
-    { _id, id },
+    { _id: id },
     {
       inStock: oldInStock - quantity,
       sold: quantity + oldSold,

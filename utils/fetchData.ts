@@ -1,6 +1,6 @@
 const baseUrl = process.env.BASE_URL
 
-export const getData = async (url: string, token: string) => {
+export const getData = async (url: string, token: string = '') => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: 'GET',
     headers: {
@@ -11,7 +11,7 @@ export const getData = async (url: string, token: string) => {
   return await res.json()
 }
 
-export const postData = async (url: string, body: any, token: string) => {
+export const postData = async (url: string, body: any, token: string = '') => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: 'POST',
     headers: {
@@ -24,7 +24,7 @@ export const postData = async (url: string, body: any, token: string) => {
   return await res.json()
 }
 
-export const putData = async (url: string, body: any, token: string) => {
+export const putData = async (url: string, body: any, token: string = '') => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: 'PUT',
     headers: {
@@ -37,7 +37,7 @@ export const putData = async (url: string, body: any, token: string) => {
   return await res.json()
 }
 
-export const patchData = async (url: string, body: any, token: string) => {
+export const patchData = async (url: string, body: any, token: string = '') => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: 'PATCH',
     headers: {
@@ -50,7 +50,7 @@ export const patchData = async (url: string, body: any, token: string) => {
   return await res.json()
 }
 
-export const deleteData = async (url: string, token: string) => {
+export const deleteData = async (url: string, token: string = '') => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: 'DELETE',
     headers: {

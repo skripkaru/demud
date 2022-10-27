@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useAppSelector } from '@hooks/useAppSelector'
 import { useActions } from '@hooks/useActions'
 import { useState } from 'react'
+import { IAuth } from '../types'
 
 const Header = () => {
   const router = useRouter()
@@ -15,8 +16,8 @@ const Header = () => {
 
   const handleLogout = () => {
     Cookie.remove('refreshtoken', { path: 'api/auth/accessToken' })
-    setAuth({})
-    setNotify({ success: 'Вы вышли!' })
+    setAuth({} as IAuth)
+    setNotify({ success: 'Вы вышли' })
   }
 
   const getTotalQuantity = () => {
@@ -99,9 +100,11 @@ const Header = () => {
                     <svg className="icon w-4 h-4 mr-2">
                       <use xlinkHref="#cart"></use>
                     </svg>
-                    <span className="absolute -top-2 right-0 flex items-center justify-center w-4 h-4 rounded-full bg-teal-500 text-white text-xs">
-                      {getTotalQuantity() || 0}
-                    </span>
+                    {getTotalQuantity() ? (
+                      <span className="absolute -top-2 right-0 flex items-center justify-center w-4 h-4 rounded-full bg-teal-500 text-white text-xs">
+                        {getTotalQuantity()}
+                      </span>
+                    ) : null}
                   </div>
                   Корзина
                 </a>

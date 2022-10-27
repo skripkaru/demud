@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import Users from '@models/user'
 import { NextApiRequest, NextApiResponse } from 'next'
 
@@ -7,7 +7,10 @@ const auth = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!token) return res.status(400).json({ err: 'Invalid Authentication' })
 
-  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string)
+  const decoded = jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET as string
+  ) as JwtPayload
 
   if (!decoded) return res.status(400).json({ err: 'Invalid Authentication' })
 
